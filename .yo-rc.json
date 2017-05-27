@@ -1,0 +1,9 @@
+{
+  "generator-node": {
+    "promptValues": {
+      "authorName": "Luiz Américo",
+      "authorEmail": "brandkarl@gmail.com",
+      "authorUrl": ""
+    }
+  }
+}
