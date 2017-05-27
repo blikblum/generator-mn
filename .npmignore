@@ -1,0 +1,4 @@
+node_modules
+coverage
+/.idea/
+__tests__
