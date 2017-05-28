@@ -5,8 +5,11 @@ const yosay = require('yosay');
 const ConfigBuilder = require('../../utils/configbuilder')
 
 module.exports = class extends Generator {
-  prompting() {
+  constructor(args, opts) {
+    super(args, opts)
     this.builder = new ConfigBuilder(this)
+  }
+  prompting() {
     // Have Yeoman greet the user.
     this.log(yosay(
       'Welcome to ' + chalk.red('generator-mn') + '. A generator for modern Marionette Applications!'
@@ -39,19 +42,22 @@ module.exports = class extends Generator {
     return this.prompt(prompts).then(props => {
       // To access props later use this.props.someAnswer;
       this.log(props)
-      this.props = props;
+      props.renderers.forEach(function (renderer) {
+        this.builder.addRequirement(renderer)
+      }, this)
+      this.props = props
     });
   }
 
   writing() {
     this.builder.savePackageFile()
     this.fs.copy(
-      this.templatePath('dummyfile.txt'),
-      this.destinationPath('dummyfile.txt')
+      this.templatePath('src'),
+      this.destinationPath('src')
     );
   }
 
   install() {
-    this.installDependencies();
+    //this.installDependencies();
   }
 };
