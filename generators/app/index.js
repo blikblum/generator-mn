@@ -3,6 +3,7 @@ const Generator = require('yeoman-generator');
 const chalk = require('chalk');
 const yosay = require('yosay');
 const ConfigBuilder = require('../../utils/configbuilder')
+const rendererMap = require('../../renderermap')
 
 module.exports = class extends Generator {
   constructor(args, opts) {
@@ -67,8 +68,19 @@ module.exports = class extends Generator {
   }
 
   writing() {
+    let setupDef = {header: '', body: ''}
+    let defaultRenderer = rendererMap[this.props.defaultRenderer] || this.props.defaultRenderer
+    if (defaultRenderer) {
+      setupDef.header = `import renderer from 'marionette.renderers/${defaultRenderer}'`
+      setupDef.body = 'Marionette.View.setRenderer(renderer)'
+    }
     this.builder.savePackageFile()
     this.builder.saveWebpackConfigFile()
+    this.fs.copyTpl(
+      this.templatePath('setup.js'),
+      this.destinationPath('src/setup.js'),
+      setupDef
+    );
     this.fs.copy(
       this.templatePath('src'),
       this.destinationPath('src')
