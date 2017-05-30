@@ -15,7 +15,21 @@ module.exports = class extends Generator {
       'Welcome to ' + chalk.red('generator-mn') + '. A generator for modern Marionette Applications!'
     ));
 
-    const prompts = [{
+    let prompts = [{
+      name: 'name',
+      default: '',
+      message: 'Application name',
+      when: function () {
+        return false // disable for now
+      }
+    },{
+      name: 'description',
+      default: '',
+      message: 'Application description',
+      when: function () {
+        return false // disable for now
+      }
+    },{
       type: 'checkbox',
       name: 'renderers',
       message: 'Select one or more custom renderers',
@@ -35,7 +49,7 @@ module.exports = class extends Generator {
           return !!(answers.renderers && answers.renderers.length)
         },
         choices: function (answers) {
-          return ['builtin'].concat(answers.renderers)
+          return [{name: 'builtin', value: ''}].concat(answers.renderers)
         }
       }];
 
@@ -45,12 +59,16 @@ module.exports = class extends Generator {
       props.renderers.forEach(function (renderer) {
         this.builder.addRequirement(renderer)
       }, this)
+
+      this.config.set('defaultRenderer', props.defaultRenderer)
+
       this.props = props
     });
   }
 
   writing() {
     this.builder.savePackageFile()
+    this.builder.saveWebpackConfigFile()
     this.fs.copy(
       this.templatePath('src'),
       this.destinationPath('src')
@@ -58,6 +76,6 @@ module.exports = class extends Generator {
   }
 
   install() {
-    //this.installDependencies();
+    this.yarnInstall();
   }
 };
