@@ -3,7 +3,7 @@ module.exports = {
     dependencies: ['rivets', 'rivets-backbone-adapter'],
     devDependencies: ['html-loader'],
     loaders: [{body: `{
-      test: /\\.html$/,
+      test: /-tpl\\.html$/,
       use: ['html-loader']
     }`}]
   },
@@ -12,8 +12,8 @@ module.exports = {
     dependencies: ['incremental-dom'],
     devDependencies: ['superviews.js', 'superviews-loader'],
     loaders: [{body: `{
-        test: /\\.sview$/,
-        use: ['superviews-loader']
+        test: /-tpl\\.html$/,
+        use: ['babel-loader', 'superviews-loader']
     }`}]
   }
 }
