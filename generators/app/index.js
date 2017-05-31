@@ -85,6 +85,10 @@ module.exports = class extends Generator {
       this.templatePath('src'),
       this.destinationPath('src')
     );
+    this.fs.copy(
+      this.templatePath('.gitignore'),
+      this.destinationPath('.gitignore')
+    );
   }
 
   install() {
