@@ -1,6 +1,6 @@
 {
   "name": "generator-mn",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "[WIP] Marionette applications with Webpack, Bootstrap, Framework7 and custom renderers",
   "homepage": "",
   "author": {
