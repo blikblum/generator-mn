@@ -4,5 +4,6 @@ module.exports = {
   'html-loader': '^0.4.5',
   'incremental-dom': '^0.5.1',
   'superviews.js': '^3.0.4',
-  'superviews-loader': '^0.0.5'
+  'superviews-loader': '^0.0.5',
+  snabbdom: '^0.6.9'
 }

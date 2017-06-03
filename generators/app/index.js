@@ -23,36 +23,72 @@ module.exports = class extends Generator {
       when: function () {
         return false // disable for now
       }
-    },{
+    }, {
       name: 'description',
       default: '',
       message: 'Application description',
       when: function () {
         return false // disable for now
       }
-    },{
+    }, {
       type: 'checkbox',
       name: 'renderers',
       message: 'Select one or more custom renderers',
-      choices:[
-        {name: 'Rivets', value: 'rivets', short: "Data binding library (blikblum's svelte fork)"},
-        {name: 'Superviews', value: 'superviews', short: "Incremental DOM based template"},
-        {name: 'Snabbdom', value: 'snabbdom', short: "Virtual DOM library"},
-        {name: 'Virtual-DOM', value: 'virtualdom', short: "Virtual DOM library"},
-        {name: 'Inferno', value: 'inferno', short: "Virtual DOM library"}
+      choices: [
+        { name: 'Rivets', value: 'rivets', short: "Data binding library (blikblum's svelte fork)" },
+        { name: 'Superviews', value: 'superviews', short: "Incremental DOM based template" },
+        { name: 'Snabbdom', value: 'snabbdom', short: "Virtual DOM library" },
+        { name: 'Virtual-DOM', value: 'virtualdom', short: "Virtual DOM library" },
+        { name: 'Inferno', value: 'inferno', short: "Virtual DOM library" }
       ]
+    }, {
+      type: 'checkbox',
+      name: 'addons',
+      message: 'Select Snabbdom addons',
+      choices: [
+        { name: 'JSX transformer', value: 'snabbdom-jsx' },
+        { name: 'Hyperscript helpers', value: 'snabbdom-helpers' }
+      ],
+      when: function (answers) {
+        return answers.renderers.indexOf('snabbdom') !== -1
+      }
     },
-      {
-        type: 'list',
-        name: 'defaultRenderer',
-        message: 'Select the default renderer',
-        when: function (answers) {
-          return !!(answers.renderers && answers.renderers.length)
-        },
-        choices: function (answers) {
-          return [{name: 'builtin', value: ''}].concat(answers.renderers)
-        }
-      }];
+    {
+      type: 'checkbox',
+      name: 'addons',
+      message: 'Select Inferno addons',
+      choices: [
+        { name: 'JSX transformer', value: 'inferno-jsx' },
+        { name: 'Hyperscript helpers', value: 'inferno-hyperscript' }
+      ],
+      when: function (answers) {
+        return answers.renderers.indexOf('inferno') !== -1
+      }
+    },
+    {
+      type: 'checkbox',
+      name: 'addons',
+      message: 'Select Virtual-DOM addons',
+      choices: [
+        { name: 'JSX transformer', value: 'virtual-dom-jsx' },
+        { name: 'Hyperscript helpers', value: 'virtual-dom-helpers' },
+        { name: 'Handlebars to Hyperscript', value: 'handlebars-hyperscript' }
+      ],
+      when: function (answers) {
+        return answers.renderers.indexOf('virtual-dom') !== -1
+      }
+    },
+    {
+      type: 'list',
+      name: 'defaultRenderer',
+      message: 'Select the default renderer',
+      when: function (answers) {
+        return !!(answers.renderers && answers.renderers.length)
+      },
+      choices: function (answers) {
+        return [{ name: 'builtin', value: '' }].concat(answers.renderers)
+      }
+    }];
 
     return this.prompt(prompts).then(props => {
       // To access props later use this.props.someAnswer;
@@ -68,7 +104,7 @@ module.exports = class extends Generator {
   }
 
   writing() {
-    let setupDef = {header: '', body: ''}
+    let setupDef = { header: '', body: '' }
     let defaultRenderer = rendererMap[this.props.defaultRenderer] || this.props.defaultRenderer
     if (defaultRenderer) {
       setupDef.header = `import renderer from 'marionette.renderers/${defaultRenderer}'`
