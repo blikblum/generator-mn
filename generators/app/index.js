@@ -38,12 +38,12 @@ module.exports = class extends Generator {
         { name: 'Rivets', value: 'rivets', short: "Data binding library (blikblum's svelte fork)" },
         { name: 'Superviews', value: 'superviews', short: "Incremental DOM based template" },
         { name: 'Snabbdom', value: 'snabbdom', short: "Virtual DOM library" },
-        { name: 'Virtual-DOM', value: 'virtualdom', short: "Virtual DOM library" },
+        { name: 'Virtual-DOM', value: 'virtual-dom', short: "Virtual DOM library" },
         { name: 'Inferno', value: 'inferno', short: "Virtual DOM library" }
       ]
     }, {
       type: 'checkbox',
-      name: 'addons',
+      name: 'addons_snabbdom',
       message: 'Select Snabbdom addons',
       choices: [
         { name: 'JSX transformer', value: 'snabbdom-jsx' },
@@ -55,7 +55,7 @@ module.exports = class extends Generator {
     },
     {
       type: 'checkbox',
-      name: 'addons',
+      name: 'addons_inferno',
       message: 'Select Inferno addons',
       choices: [
         { name: 'JSX transformer', value: 'inferno-jsx' },
@@ -67,11 +67,11 @@ module.exports = class extends Generator {
     },
     {
       type: 'checkbox',
-      name: 'addons',
+      name: 'addons_virtualdom',
       message: 'Select Virtual-DOM addons',
       choices: [
         { name: 'JSX transformer', value: 'virtual-dom-jsx' },
-        { name: 'Hyperscript helpers', value: 'virtual-dom-helpers' },
+        { name: 'Hyperscript helpers', value: 'hyperscript-helpers' },
         { name: 'Handlebars to Hyperscript', value: 'handlebars-hyperscript' }
       ],
       when: function (answers) {
@@ -93,9 +93,18 @@ module.exports = class extends Generator {
     return this.prompt(prompts).then(props => {
       // To access props later use this.props.someAnswer;
       this.log(props)
-      props.renderers.forEach(function (renderer) {
-        this.builder.addRequirement(renderer)
-      }, this)
+
+      props.renderers.forEach(this.builder.addRequirement, this.builder)
+
+      var addonsRequirements = Object.keys(props).reduce(function (memo, name) {
+        if (name.indexOf('addons_') === 0) {
+          return memo.concat(props[name])
+        }
+        return memo
+      }, [])
+
+      this.log(addonsRequirements)
+      addonsRequirements.forEach(this.builder.addRequirement, this.builder)
 
       this.config.set('defaultRenderer', props.defaultRenderer)
 

@@ -15,5 +15,21 @@ module.exports = {
         test: /-tpl\\.html$/,
         use: ['babel-loader', 'superviews-loader']
     }`}]
+  },
+
+  'virtual-dom': {
+    dependencies: ['virtual-dom']
+  },
+
+  'hyperscript-helpers': {
+    dependencies: ['hyperscript-helpers']
+  },
+
+  'handlebars-hyperscript': {
+    devDependencies: ['virtual-dom-handlebars-loader', 'virtual-dom-handlebars'],
+    loaders: [{body: `{
+        test: /-tpl\\.html$/,
+        use: ['virtual-dom-handlebars-loader']
+    }`}]
   }
 }
