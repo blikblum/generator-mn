@@ -91,6 +91,16 @@ module.exports = class extends Generator {
       choices: function (answers) {
         return [{ name: 'builtin', value: '' }].concat(answers.renderers)
       }
+    }, {
+      type: 'checkbox',
+      name: 'extra',
+      message: 'Extra dependencies',
+      choices: [
+        {name: 'backbone-computedfields'},
+        {name: 'backbone.validation'},
+        {name: 'backbone.syphon'},
+        {name: 'backbone.localstorage'}
+      ]
     }];
 
     return this.prompt(prompts).then(props => {
@@ -108,6 +118,8 @@ module.exports = class extends Generator {
 
       this.log(addonsRequirements)
       addonsRequirements.forEach(this.builder.addRequirement, this.builder)
+
+      props.extra.forEach(this.builder.addRequirement, this.builder)
 
       this.config.set('defaultRenderer', props.defaultRenderer)
 

@@ -12,7 +12,8 @@ function reduceField(requirements, fieldName, callback, initial) {
 
 function addDependencies(memo, dependencies) {
   dependencies.forEach(function (dependency) {
-    memo[dependency] = packageVersionMap[dependency]
+    var version = packageVersionMap[dependency] || '*'
+    memo[dependency] = version
   })
   return memo
 }
