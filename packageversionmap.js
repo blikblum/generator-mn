@@ -9,5 +9,8 @@ module.exports = {
   'virtual-dom': '^2.1.1',
   'hyperscript-helpers': '^3.0.3',
   'virtual-dom-handlebars-loader': 'kohver/virtual-dom-handlebars-loader',
-  'virtual-dom-handlebars': '^0.0.5'
+  'virtual-dom-handlebars': '^0.0.5',
+  'incremental-bars': '^1.0.5',
+  'handlebars': '^4.0.10',
+  'incremental-bars-loader': '^0.1.0'
 }

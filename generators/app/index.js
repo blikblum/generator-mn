@@ -37,6 +37,7 @@ module.exports = class extends Generator {
       choices: [
         { name: 'Rivets', value: 'rivets', short: "Data binding library (blikblum's svelte fork)" },
         { name: 'Superviews', value: 'superviews', short: "Incremental DOM based template" },
+        { name: 'Incremental-Bars', value: 'incremental-bars', short: 'Incremental DOM backend for Handlebars'},
         { name: 'Snabbdom', value: 'snabbdom', short: "Virtual DOM library" },
         { name: 'Virtual-DOM', value: 'virtual-dom', short: "Virtual DOM library" },
         { name: 'Inferno', value: 'inferno', short: "Virtual DOM library" }

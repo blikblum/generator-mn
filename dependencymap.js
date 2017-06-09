@@ -17,6 +17,15 @@ module.exports = {
     }`}]
   },
 
+  'incremental-bars': {
+    dependencies: ['incremental-dom', 'handlebars'],
+    devDependencies: ['incremental-bars-loader'],
+    loaders: [{body: `{
+        test: /-tpl\\.html$/,
+        use: ['babel-loader', 'incremental-bars-loader']
+    }`}]
+  },
+
   'virtual-dom': {
     dependencies: ['virtual-dom']
   },
