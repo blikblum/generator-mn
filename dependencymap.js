@@ -30,6 +30,22 @@ module.exports = {
     dependencies: ['virtual-dom']
   },
 
+  'virtual-dom-jsx': {
+    devDependencies: ['virtual-dom-loader'],
+    loaders: [{body: `{
+        test: /\\.jsx$/,
+        use: ['virtual-dom-loader']
+    }`}]
+  },
+
+  'virtual-jade': {
+    devDependencies: ['virtual-jade-loader'],
+    loaders: [{body: `{
+        test: /\\.pug$/,
+        use: ['virtual-jade-loader']
+    }`}]
+  },
+
   'hyperscript-helpers': {
     dependencies: ['hyperscript-helpers']
   },
@@ -40,5 +56,29 @@ module.exports = {
         test: /-tpl\\.html$/,
         use: ['virtual-dom-handlebars-loader']
     }`}]
+  },
+
+  'snabbdom': {
+    dependencies: ['snabbdom']
+  },
+
+  'snabbdom-jsx': {
+    devDependencies: ['snabbdom-pragma'],
+    loaders: [{body: `{
+        test: /\\.jsx$/,
+        use: [{
+          loader: 'babel-loader', 
+          options: {
+            plugins: ['transform-react-jsx', { pragma: 'Snabbdom.createElement'}]
+          }]
+    }`}]
+  },
+
+  'snabbdom-helpers': {
+    dependencies: ['snabbdom-helpers']
+  },
+
+  'snabbdom': {
+    dependencies: ['snabbdom']
   }
 }

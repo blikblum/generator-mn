@@ -12,5 +12,10 @@ module.exports = {
   'virtual-dom-handlebars': '^0.0.5',
   'incremental-bars': '^1.0.5',
   'handlebars': '^4.0.10',
-  'incremental-bars-loader': '^0.1.0'
+  'incremental-bars-loader': '^0.1.0',
+  'virtual-dom-loader': '^0.1.0',
+  'virtual-jade-loader': '^0.5.0',
+  'snabbdom': '^0.6.9',
+  'snabbdom-helpers': '^4.0.1',
+  'snabbdom-pragma': '^2.3.0'
 }

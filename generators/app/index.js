@@ -48,7 +48,8 @@ module.exports = class extends Generator {
       message: 'Select Snabbdom addons',
       choices: [
         { name: 'JSX transformer', value: 'snabbdom-jsx' },
-        { name: 'Hyperscript helpers', value: 'snabbdom-helpers' }
+        { name: 'Hyperscript helpers', value: 'snabbdom-helpers'},
+        { name: 'Jade transformer', value: 'virtual-jade' }
       ],
       when: function (answers) {
         return answers.renderers.indexOf('snabbdom') !== -1
@@ -73,7 +74,8 @@ module.exports = class extends Generator {
       choices: [
         { name: 'JSX transformer', value: 'virtual-dom-jsx' },
         { name: 'Hyperscript helpers', value: 'hyperscript-helpers' },
-        { name: 'Handlebars to Hyperscript', value: 'handlebars-hyperscript' }
+        { name: 'Handlebars to Hyperscript', value: 'handlebars-hyperscript' },
+        { name: 'Jade transformer', value: 'virtual-jade' }
       ],
       when: function (answers) {
         return answers.renderers.indexOf('virtual-dom') !== -1
