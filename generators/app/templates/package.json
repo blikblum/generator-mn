@@ -12,7 +12,7 @@
     "backbone.radio": "^2.0.0",
     "bootstrap": "^3.3.7",
     "jquery": "^3.2.1",
-    "marionette.renderers": "^0.1.0",
+    "marionette.renderers": "^0.2.2",
     "underscore": "^1.8.3"
   },
   "devDependencies": {
