@@ -63,14 +63,18 @@ module.exports = {
   },
 
   'snabbdom-jsx': {
-    devDependencies: ['snabbdom-pragma'],
+    dependencies: ['snabbdom-pragma'],
+    devDependencies: ['babel-plugin-transform-react-jsx'],
     loaders: [{body: `{
         test: /\\.jsx$/,
         use: [{
           loader: 'babel-loader', 
           options: {
-            plugins: ['transform-react-jsx', { pragma: 'Snabbdom.createElement'}]
-          }]
+            plugins: [
+              ['transform-react-jsx', {pragma: 'Snabbdom.createElement'}]
+            ]
+          }
+        }]
     }`}]
   },
 
@@ -80,5 +84,13 @@ module.exports = {
 
   'snabbdom': {
     dependencies: ['snabbdom']
+  },
+
+  'backbone-computedfields': {
+    dependencies: ['backbone-computedfields']
+  },
+
+  'backbone.validation': {
+    dependencies: ['backbone.validation']
   }
 }
