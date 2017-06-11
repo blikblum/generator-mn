@@ -17,5 +17,7 @@ module.exports = {
   'virtual-jade-loader': '^0.5.0',
   'snabbdom': '^0.6.9',
   'snabbdom-helpers': '^4.0.1',
-  'snabbdom-pragma': '^2.3.0'
+  'snabbdom-pragma': '^2.3.0',
+  'inferno': '^3.4.3',
+  'babel-plugin-inferno': '^3.2.0'
 }

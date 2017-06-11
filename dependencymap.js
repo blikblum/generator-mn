@@ -86,11 +86,43 @@ module.exports = {
     dependencies: ['snabbdom']
   },
 
+  'inferno': {
+    dependencies: ['inferno']
+  },
+
+  'inferno-jsx': {
+    devDependencies: ['babel-plugin-inferno'],
+    loaders: [{body: `{
+        test: /\\.jsx$/,
+        use: [{
+          loader: 'babel-loader', 
+          options: {
+            plugins: [["inferno", {
+              "imports": true,
+              "pragma": ""
+            }]]
+          }
+        }]
+    }`}]
+  },
+
+  'inferno-hyperscript': {
+    dependencies: ['inferno-hyperscript']
+  },
+
   'backbone-computedfields': {
     dependencies: ['backbone-computedfields']
   },
 
   'backbone.validation': {
     dependencies: ['backbone.validation']
+  },
+
+  'backbone.syphon': {
+    dependencies: ['backbone.syphon']
+  },
+
+  'backbone.localstorage': {
+    dependencies: ['backbone.localstorage']
   }
 }
