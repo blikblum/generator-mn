@@ -16,9 +16,7 @@ module.exports = {
       use: [{
         loader: 'babel-loader',
         options: {
-          presets: [
-            ['es2015', {modules: false}]
-          ]
+          presets: [['es2015', {modules: false}]]
         }
       }]
     }, {
@@ -33,18 +31,6 @@ module.exports = {
         fallback: 'style-loader',
         use: ['css-loader', 'sass-loader']
       })
-    },{
-      test: /\.(woff|woff2)$/,
-      use: "url-loader?limit=10000&mimetype=application/font-woff"
-    }, {
-      test: /\.ttf$/,
-      use: "url-loader?limit=10000&mimetype=application/octet-stream"
-    }, {
-      test: /\.eot$/,
-      use: "file-loader"
-    }, {
-      test: /\.svg$/,
-      use: "url-loader?limit=10000&mimetype=image/svg+xml"
     }<%- loaderBody %>]
   },
   plugins: [

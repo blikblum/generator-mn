@@ -30,6 +30,15 @@ module.exports = class extends Generator {
       when: function () {
         return false // disable for now
       }
+    },{
+      type: 'list',
+      name: 'css',
+      message: 'Select a CSS/UI framework',
+      choices: [
+        { name: 'None', value: '', short: "No CSS/UI framework" },
+        { name: 'Bootstrap 3', value: 'bootstrap3', short: "Bootstrap v3" },
+        { name: 'Framework7', value: 'framework7', short: 'Framework7 mobile framework'}
+      ]
     }, {
       type: 'checkbox',
       name: 'renderers',
@@ -120,6 +129,8 @@ module.exports = class extends Generator {
       addonsRequirements.forEach(this.builder.addRequirement, this.builder)
 
       props.extra.forEach(this.builder.addRequirement, this.builder)
+
+      this.builder.addRequirement(props.css)
 
       this.config.set('defaultRenderer', props.defaultRenderer)
 

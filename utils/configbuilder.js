@@ -25,7 +25,7 @@ class ConfigBuilder {
   }
 
   addRequirement(requirement) {
-    if (this.requirements.indexOf(requirement) === -1) this.requirements.push(requirement)
+    if (requirement && this.requirements.indexOf(requirement) === -1) this.requirements.push(requirement)
   }
 
   savePackageFile() {
