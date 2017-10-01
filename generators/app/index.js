@@ -37,23 +37,23 @@ module.exports = class extends Generator {
       choices: [
         { name: 'None', value: '', short: 'No CSS/UI framework' },
         { name: 'Bootstrap 3', value: 'bootstrap3', short: 'Bootstrap v3' },
-        { name: 'Framework7', value: 'framework7', short: 'Framework7 mobile framework'}
+        { name: 'Framework7', value: 'framework7', short: 'Framework7 mobile framework' }
       ]
     }, {
       type: 'checkbox',
       name: 'renderers',
       message: 'Select one or more custom renderers',
       choices: [
-        { name: 'Rivets', value: 'rivets', short: "Data binding library (blikblum's svelte fork)" },
-        { name: 'Superviews', value: 'superviews', short: 'Incremental DOM based template' },
-        { name: 'Incremental-Bars', value: 'incremental-bars', short: 'Incremental DOM backend for Handlebars' },
-        { name: 'Snabbdom', value: 'snabbdom', short: 'Virtual DOM library' },
-        { name: 'Virtual-DOM', value: 'virtual-dom', short: 'Virtual DOM library' },
-        { name: 'Inferno', value: 'inferno', short: 'Virtual DOM library' }
+        { name: 'Rivets', value: 'rivets', short: "Rivets (Data binding library - blikblum's svelte fork)" },
+        { name: 'Superviews', value: 'superviews', short: 'Superviews (Incremental DOM based template)' },
+        { name: 'Incremental-Bars', value: 'incremental-bars', short: 'Incremental-Bars (Incremental DOM backend for Handlebars)' },
+        { name: 'Snabbdom', value: 'snabbdom', short: 'Snabbdom (Virtual DOM library)' },
+        { name: 'Virtual-DOM', value: 'virtual-dom' },
+        { name: 'Inferno', value: 'inferno', short: 'Inferno (Virtual DOM library)' }
       ]
     }, {
       type: 'checkbox',
-      name: 'addons_snabbdom',
+      name: 'addons.snabbdom',
       message: 'Select Snabbdom addons',
       choices: [
         { name: 'JSX transformer', value: 'snabbdom-jsx' },
@@ -66,7 +66,7 @@ module.exports = class extends Generator {
     },
     {
       type: 'checkbox',
-      name: 'addons_inferno',
+      name: 'addons.inferno',
       message: 'Select Inferno addons',
       choices: [
         { name: 'JSX transformer', value: 'inferno-jsx' },
@@ -78,7 +78,7 @@ module.exports = class extends Generator {
     },
     {
       type: 'checkbox',
-      name: 'addons_virtualdom',
+      name: 'addons.virtualdom',
       message: 'Select Virtual-DOM addons',
       choices: [
         { name: 'JSX transformer', value: 'virtual-dom-jsx' },
@@ -118,14 +118,11 @@ module.exports = class extends Generator {
 
       props.renderers.forEach(this.builder.addRequirement, this.builder)
 
-      var addonsRequirements = Object.keys(props).reduce(function (memo, name) {
-        if (name.indexOf('addons_') === 0) {
-          return memo.concat(props[name])
-        }
-        return memo
+      var addonsRequirements = Object.keys(props.addons || {}).reduce(function (requirements, addonName) {
+        return requirements.concat(props.addons[addonName])
       }, [])
 
-      this.log(addonsRequirements)
+      this.log('addonsRequirements', addonsRequirements)
       addonsRequirements.forEach(this.builder.addRequirement, this.builder)
 
       props.extra.forEach(this.builder.addRequirement, this.builder)
