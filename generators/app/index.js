@@ -1,6 +1,7 @@
 'use strict'
 const Generator = require('yeoman-generator')
 const chalk = require('chalk')
+const path = require('path')
 const yosay = require('yosay')
 const ConfigBuilder = require('../../utils/configbuilder')
 const rendererMap = require('../../renderermap')
@@ -8,6 +9,7 @@ const rendererMap = require('../../renderermap')
 module.exports = class extends Generator {
   constructor (args, opts) {
     super(args, opts)
+    this.DEVMODE = this.fs.exists(path.join(this.sourceRoot(), '..', '..', '..', 'yarn.lock'))
     this.builder = new ConfigBuilder(this)
   }
   prompting () {
@@ -114,7 +116,7 @@ module.exports = class extends Generator {
 
     return this.prompt(prompts).then(props => {
       // To access props later use this.props.someAnswer;
-      this.log(props)
+      this.DEVMODE && this.log('props', JSON.stringify(props))
 
       props.renderers.forEach(this.builder.addRequirement, this.builder)
 
@@ -122,7 +124,6 @@ module.exports = class extends Generator {
         return requirements.concat(props.addons[addonName])
       }, [])
 
-      this.log('addonsRequirements', addonsRequirements)
       addonsRequirements.forEach(this.builder.addRequirement, this.builder)
 
       props.extra.forEach(this.builder.addRequirement, this.builder)
