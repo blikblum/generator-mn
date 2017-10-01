@@ -58,10 +58,6 @@ module.exports = {
     }`}]
   },
 
-  'snabbdom': {
-    dependencies: ['snabbdom']
-  },
-
   'snabbdom-jsx': {
     dependencies: ['snabbdom-pragma'],
     devDependencies: ['babel-plugin-transform-react-jsx'],
@@ -82,11 +78,11 @@ module.exports = {
     dependencies: ['snabbdom-helpers']
   },
 
-  'snabbdom': {
+  snabbdom: {
     dependencies: ['snabbdom']
   },
 
-  'inferno': {
+  inferno: {
     dependencies: ['inferno']
   },
 
@@ -125,7 +121,8 @@ module.exports = {
   'backbone.localstorage': {
     dependencies: ['backbone.localstorage']
   },
-  'bootstrap3': {
+
+  bootstrap3: {
     dependencies: ['bootstrap'],
     devDependencies: ['url-loader', 'file-loader'],
     loaders: [{body: `{
@@ -142,10 +139,11 @@ module.exports = {
       use: "url-loader?limit=10000&mimetype=image/svg+xml"
     }`}],
     setup: {
-      header: "import 'bootstrap/dist/css/bootstrap.css'"
+      header: 'import \'bootstrap/dist/css/bootstrap.css\''
     }
   },
-  'framework7': {
+
+  framework7: {
     dependencies: ['framework7', 'marionette.f7'],
     devDependencies: ['file-loader'],
     loaders: [{
@@ -155,7 +153,7 @@ module.exports = {
       }`
     }],
     setup: {
-      header: "import 'framework7/dist/css/framework7.material.css'"
+      header: 'import \'framework7/dist/css/framework7.material.css\''
     }
   }
-}
+};

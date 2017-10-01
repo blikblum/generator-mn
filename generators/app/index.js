@@ -1,20 +1,20 @@
-'use strict';
-const Generator = require('yeoman-generator');
-const chalk = require('chalk');
-const yosay = require('yosay');
+'use strict'
+const Generator = require('yeoman-generator')
+const chalk = require('chalk')
+const yosay = require('yosay')
 const ConfigBuilder = require('../../utils/configbuilder')
 const rendererMap = require('../../renderermap')
 
 module.exports = class extends Generator {
-  constructor(args, opts) {
+  constructor (args, opts) {
     super(args, opts)
     this.builder = new ConfigBuilder(this)
   }
-  prompting() {
+  prompting () {
     // Have Yeoman greet the user.
     this.log(yosay(
       'Welcome to ' + chalk.red('generator-mn') + '. A generator for modern Marionette Applications!'
-    ));
+    ))
 
     let prompts = [{
       name: 'name',
@@ -30,13 +30,13 @@ module.exports = class extends Generator {
       when: function () {
         return false // disable for now
       }
-    },{
+    }, {
       type: 'list',
       name: 'css',
       message: 'Select a CSS/UI framework',
       choices: [
-        { name: 'None', value: '', short: "No CSS/UI framework" },
-        { name: 'Bootstrap 3', value: 'bootstrap3', short: "Bootstrap v3" },
+        { name: 'None', value: '', short: 'No CSS/UI framework' },
+        { name: 'Bootstrap 3', value: 'bootstrap3', short: 'Bootstrap v3' },
         { name: 'Framework7', value: 'framework7', short: 'Framework7 mobile framework'}
       ]
     }, {
@@ -45,11 +45,11 @@ module.exports = class extends Generator {
       message: 'Select one or more custom renderers',
       choices: [
         { name: 'Rivets', value: 'rivets', short: "Data binding library (blikblum's svelte fork)" },
-        { name: 'Superviews', value: 'superviews', short: "Incremental DOM based template" },
-        { name: 'Incremental-Bars', value: 'incremental-bars', short: 'Incremental DOM backend for Handlebars'},
-        { name: 'Snabbdom', value: 'snabbdom', short: "Virtual DOM library" },
-        { name: 'Virtual-DOM', value: 'virtual-dom', short: "Virtual DOM library" },
-        { name: 'Inferno', value: 'inferno', short: "Virtual DOM library" }
+        { name: 'Superviews', value: 'superviews', short: 'Incremental DOM based template' },
+        { name: 'Incremental-Bars', value: 'incremental-bars', short: 'Incremental DOM backend for Handlebars' },
+        { name: 'Snabbdom', value: 'snabbdom', short: 'Virtual DOM library' },
+        { name: 'Virtual-DOM', value: 'virtual-dom', short: 'Virtual DOM library' },
+        { name: 'Inferno', value: 'inferno', short: 'Virtual DOM library' }
       ]
     }, {
       type: 'checkbox',
@@ -57,7 +57,7 @@ module.exports = class extends Generator {
       message: 'Select Snabbdom addons',
       choices: [
         { name: 'JSX transformer', value: 'snabbdom-jsx' },
-        { name: 'Hyperscript helpers', value: 'snabbdom-helpers'},
+        { name: 'Hyperscript helpers', value: 'snabbdom-helpers' },
         { name: 'Jade transformer', value: 'virtual-jade' }
       ],
       when: function (answers) {
@@ -110,7 +110,7 @@ module.exports = class extends Generator {
         {name: 'backbone.syphon'},
         {name: 'backbone.localstorage'}
       ]
-    }];
+    }]
 
     return this.prompt(prompts).then(props => {
       // To access props later use this.props.someAnswer;
@@ -135,10 +135,10 @@ module.exports = class extends Generator {
       this.config.set('defaultRenderer', props.defaultRenderer)
 
       this.props = props
-    });
+    })
   }
 
-  writing() {
+  writing () {
     let setupDef = { header: '', body: '' }
     let defaultRenderer = rendererMap[this.props.defaultRenderer] || this.props.defaultRenderer
     if (defaultRenderer) {
@@ -151,18 +151,18 @@ module.exports = class extends Generator {
       this.templatePath('setup.js'),
       this.destinationPath('src/setup.js'),
       setupDef
-    );
+    )
     this.fs.copy(
       this.templatePath('src'),
       this.destinationPath('src')
-    );
+    )
     this.fs.copy(
       this.templatePath('.gitignore'),
       this.destinationPath('.gitignore')
-    );
+    )
   }
 
-  install() {
-    this.yarnInstall();
+  install () {
+    this.yarnInstall()
   }
-};
+}
