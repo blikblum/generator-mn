@@ -141,7 +141,7 @@ module.exports = class extends Generator {
     let defaultRenderer = rendererMap[this.props.defaultRenderer] || this.props.defaultRenderer
     if (defaultRenderer) {
       setupDef.header = `import renderer from 'marionette.renderers/${defaultRenderer}'`
-      setupDef.body = 'Marionette.View.setRenderer(renderer)'
+      setupDef.body = 'View.setRenderer(renderer)'
     }
     this.builder.savePackageFile()
     this.builder.saveWebpackConfigFile()

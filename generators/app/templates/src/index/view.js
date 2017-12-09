@@ -1,5 +1,5 @@
-import Marionette from 'backbone.marionette'
+import {View} from 'backbone.marionette'
 
-export default Marionette.View.extend({
+export default View.extend({
 
 })

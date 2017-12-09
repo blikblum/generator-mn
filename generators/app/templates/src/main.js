@@ -1,10 +1,10 @@
 import './setup'
-import Marionette from 'backbone.marionette'
+import {Application} from 'backbone.marionette'
 import IndexView from './index/view'
 
-let Application = Marionette.Application.extend({
+let App = Application.extend({
   region: '#main-view'
 })
 
-let app = new Application()
+let app = new App()
 app.getRegion().show(new IndexView())
