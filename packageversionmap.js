@@ -17,6 +17,8 @@ module.exports = {
   'snabbdom': '^0.6.9',
   'snabbdom-helpers': '^4.0.1',
   'snabbdom-pragma': '^2.3.0',
+  'babel-plugin-transform-react-jsx': '^6.24.1',
+  'babel-plugin-jsx-pragmatic': '^1.0.2',
   'inferno': '^3.4.3',
   'babel-plugin-inferno': '^3.2.0',
   'bootstrap': '^3.3.7',

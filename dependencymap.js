@@ -60,14 +60,21 @@ module.exports = {
 
   'snabbdom-jsx': {
     dependencies: ['snabbdom-pragma'],
-    devDependencies: ['babel-plugin-transform-react-jsx'],
+    devDependencies: ['babel-plugin-transform-react-jsx', 'babel-plugin-jsx-pragmatic'],
     loaders: [{body: `{
         test: /\\.jsx$/,
         use: [{
           loader: 'babel-loader', 
           options: {
+            presets: [
+              ['es2015', {modules: false}]
+            ],          
             plugins: [
-              ['transform-react-jsx', {pragma: 'Snabbdom.createElement'}]
+              ['transform-react-jsx', {pragma: 'Snabbdom.createElement'}],
+              ['babel-plugin-jsx-pragmatic', {
+                module: 'snabbdom-pragma',
+                import: 'Snabbdom'
+              }]
             ]
           }
         }]
