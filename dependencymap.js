@@ -67,7 +67,16 @@ module.exports = {
           loader: 'babel-loader', 
           options: {
             presets: [
-              ['es2015', {modules: false}]
+              ['env', {
+                modules: false,
+                targets: {
+                  browsers: [
+                    'ie 11',
+                    'last 2 versions',
+                    'Firefox ESR'
+                  ],
+                },
+              }],
             ],          
             plugins: [
               ['transform-react-jsx', {pragma: 'Snabbdom.createElement'}],
