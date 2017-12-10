@@ -173,7 +173,7 @@ module.exports = {
       test: /\\.svg$/,
       use: "url-loader?limit=10000&mimetype=image/svg+xml"
     }, {
-      test: /^bootstrap\\.js$/,
+      test: /bootstrap.+\\.js$/,
       use: "imports-loader?jQuery=jquery,$=jquery,this=>window"
     }`}],
     sass: {
