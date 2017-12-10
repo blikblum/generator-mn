@@ -1,6 +1,14 @@
 # generator-mn [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
-> Marionette applications with Webpack
+> Modern setup for Marionette applications
 
+## Features
+
+ * Uses webpack 3.x with dev-server
+ * Uses babel 6.x with preset-env (ie 11 + green browsers) 
+ * Configures service-worker (WorkBox).
+ * Custom CSS framework (Bootstrap 3, Bootstrap 4, Framework7)
+ * Custom renderer (Snabbdom, React, inferno, idom, virtual-dom, rivets) 
+ 
 ## Installation
 
 First, install [Yeoman](http://yeoman.io) and generator-mn using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
@@ -10,18 +18,50 @@ npm install -g yo
 npm install -g generator-mn
 ```
 
-Then generate your new project:
+## Usage
+
+### Generate a new project
 
 ```bash
 yo mn
 ```
 
-## Getting To Know Yeoman
+The generator will ask for some options:
 
- * Yeoman has a heart of gold.
- * Yeoman is a person with feelings and opinions, but is very easy to work with.
- * Yeoman can be too opinionated at times but is easily convinced not to be.
- * Feel free to [learn more about Yeoman](http://yeoman.io/).
+##### CSS/UI framework
+  * none
+  * Bootstrap 3
+  * Bootstrap 4
+  * Framework7
+
+##### Renderers
+  * Snabbdom
+  * React
+  * Inferno  
+  * Superviews (incremental-dom)
+  * Incremental-Bars (Handlebars + incremental-dom)
+  * Virtual-Dom
+  * Rivets (blikblum's fork)
+
+> Some renderers offers specific options like configuration of JSX or jade transformer
+
+##### Backbone plugins
+  * backbone-computedfields
+  * backbone.validation
+  * backbone.syphon
+  * backbone.localstorage
+  
+### Build the application
+
+For development (a server will be started at http://localhost:8080)
+```bash
+npm run dev 
+```
+
+For production
+```bash
+npm run prod
+```
 
 ## License
 
