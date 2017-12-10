@@ -32,6 +32,24 @@ function concatHeaderBody (memo, item) {
   return memo
 }
 
+const rendererSetupMap = {
+  snabbdom: {
+    header: `import createRenderer from 'marionette.renderers/snabbdom'`,
+    body: `
+const renderer = createRenderer([ // Init patch function with chosen modules
+  require('snabbdom/modules/attributes').default,
+  require('snabbdom/modules/eventlisteners').default,
+  require('snabbdom/modules/class').default,
+  require('snabbdom/modules/props').default,
+  require('snabbdom/modules/style').default,
+  require('snabbdom/modules/dataset').default
+])
+
+View.setRenderer(renderer)
+    `
+  }
+}
+
 class ConfigBuilder {
   constructor (generator) {
     this.requirements = []
@@ -45,8 +63,10 @@ class ConfigBuilder {
   getSetupDef (defaultRenderer) {
     let setupDef = { header: '', body: '' }
     if (defaultRenderer) {
-      setupDef.header = `import renderer from 'marionette.renderers/${defaultRenderer}'`
-      setupDef.body = 'View.setRenderer(renderer)'
+      setupDef = rendererSetupMap[defaultRenderer] || {
+        header: `import renderer from 'marionette.renderers/${defaultRenderer}'`,
+        body: 'View.setRenderer(renderer)'
+      }
     }
     return reduceField(this.requirements, 'setup', concatHeaderBody, setupDef)
   }
