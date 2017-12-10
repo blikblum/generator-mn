@@ -32,5 +32,6 @@ module.exports = {
   'popper.js': '^1.12.9',
   'font-awesome': '^4.7.0',
   'url-loader': '^0.5.8',
-  'file-loader': '^0.11.1'
+  'file-loader': '^0.11.1',
+  'imports-loader': '^0.7.1'
 }
