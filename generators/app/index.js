@@ -47,7 +47,8 @@ module.exports = class extends Generator {
       name: 'renderers',
       message: 'Select one or more custom renderers',
       choices: [
-        { name: 'Rivets', value: 'rivets', short: "Rivets (Data binding library - blikblum's svelte fork)" },
+        { name: 'React', value: 'react', short: 'React' },
+        { name: 'Rivets', value: 'rivets', short: `Rivets (Data binding library - blikblum's svelte fork)` },
         { name: 'Superviews', value: 'superviews', short: 'Superviews (Incremental DOM based template)' },
         { name: 'Incremental-Bars', value: 'incremental-bars', short: 'Incremental-Bars (Incremental DOM backend for Handlebars)' },
         { name: 'Snabbdom', value: 'snabbdom', short: 'Snabbdom (Virtual DOM library)' },

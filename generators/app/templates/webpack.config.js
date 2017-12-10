@@ -8,6 +8,17 @@ var WorkboxPlugin = require('workbox-webpack-plugin')
 var isProd = process.argv.indexOf('-p') !== -1
 var DIST_DIR = 'dist'
 
+var envPresetConfig = {
+  modules: false,
+  targets: {
+    browsers: [
+      'ie 11',
+      'last 2 versions',
+      'Firefox ESR'
+    ]
+  }
+}
+
 module.exports = {
   entry: './src/main.js',
   output: {
@@ -22,16 +33,7 @@ module.exports = {
         loader: 'babel-loader',
         options: {
           presets: [
-            ['env', {
-              modules: false,
-              targets: {
-                browsers: [
-                  'ie 11',
-                  'last 2 versions',
-                  'Firefox ESR'
-                ],
-              },
-            }],
+            ['env', envPresetConfig]
           ]
         }
       }]

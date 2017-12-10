@@ -67,16 +67,7 @@ module.exports = {
           loader: 'babel-loader', 
           options: {
             presets: [
-              ['env', {
-                modules: false,
-                targets: {
-                  browsers: [
-                    'ie 11',
-                    'last 2 versions',
-                    'Firefox ESR'
-                  ],
-                },
-              }],
+              ['env', envPresetConfig]
             ],          
             plugins: [
               ['transform-react-jsx', {pragma: 'Snabbdom.createElement'}],
@@ -84,6 +75,23 @@ module.exports = {
                 module: 'snabbdom-pragma',
                 import: 'Snabbdom'
               }]
+            ]
+          }
+        }]
+    }`}]
+  },
+
+  react: {
+    dependencies: ['react', 'react-dom'],
+    devDependencies: ['babel-preset-react'],
+    loaders: [{body: `{
+        test: /\\.jsx$/,
+        use: [{
+          loader: 'babel-loader', 
+          options: {
+            presets: [
+              'react',
+              ['env', envPresetConfig]
             ]
           }
         }]
@@ -109,6 +117,9 @@ module.exports = {
         use: [{
           loader: 'babel-loader', 
           options: {
+            presets: [
+              ['env', envPresetConfig]
+            ],
             plugins: [["inferno", {
               "imports": true,
               "pragma": ""
