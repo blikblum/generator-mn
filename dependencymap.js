@@ -149,6 +149,10 @@ module.exports = {
     dependencies: ['backbone.localstorage']
   },
 
+  'marionette.native': {
+    dependencies: ['marionette.native']
+  },
+
   bootstrap3: {
     dependencies: ['bootstrap3'],
     devDependencies: ['url-loader', 'file-loader', 'imports-loader'],

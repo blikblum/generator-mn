@@ -45,11 +45,12 @@ The generator will ask for some options:
 
 > Some renderers offers specific options like configuration of JSX or jade transformer
 
-##### Backbone plugins
+##### Backbone/Marionette plugins
   * backbone-computedfields
   * backbone.validation
   * backbone.syphon
   * backbone.localstorage
+  * marionette.native
   
 ### Build the application
 

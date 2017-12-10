@@ -112,7 +112,8 @@ module.exports = class extends Generator {
         {name: 'backbone-computedfields'},
         {name: 'backbone.validation'},
         {name: 'backbone.syphon'},
-        {name: 'backbone.localstorage'}
+        {name: 'backbone.localstorage'},
+        {name: 'marionette.native'}
       ]
     }]
 
