@@ -165,8 +165,10 @@ module.exports = {
       test: /\\.svg$/,
       use: "url-loader?limit=10000&mimetype=image/svg+xml"
     }`}],
-    setup: {
-      header: 'import \'bootstrap/dist/css/bootstrap.css\''
+    sass: {
+      header: `
+$icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";      
+@import "~bootstrap-sass/assets/stylesheets/bootstrap";`
     }
   },
 

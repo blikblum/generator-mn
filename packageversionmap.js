@@ -22,7 +22,7 @@ module.exports = {
   'inferno': '^3.4.3',
   'babel-plugin-inferno': '^3.2.0',
   'bootstrap3': {
-    name: 'bootstrap',
+    name: 'bootstrap-sass',
     version: '^3.3.7'
   },
   'bootstrap4': {
