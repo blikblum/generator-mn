@@ -175,14 +175,12 @@ module.exports = {
       test: /\\.svg$/,
       use: "url-loader?limit=10000&mimetype=image/svg+xml"
     }`}],
-    setup: {
-      header: 'import \'bootstrap/dist/css/bootstrap.css\''
-    },
     sass: {
       header: `
-        $fa-font-path: "~font-awesome/fonts";
-        @import '~font-awesome/scss/font-awesome.scss';
-      `
+@import "~bootstrap/scss/bootstrap";
+$fa-font-path: "~font-awesome/fonts";
+@import '~font-awesome/scss/font-awesome.scss';
+`
     }
   },
 
