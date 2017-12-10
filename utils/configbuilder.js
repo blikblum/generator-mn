@@ -1,7 +1,7 @@
 var dependencyMap = require('../dependencymap')
 var packageVersionMap = require('../packageversionmap')
 
-function reduceField(requirements, fieldName, callback, initial) {
+function reduceField (requirements, fieldName, callback, initial) {
   return requirements.reduce(function (memo, item) {
     var def = dependencyMap[item]
     var entry = def[fieldName]
@@ -10,11 +10,25 @@ function reduceField(requirements, fieldName, callback, initial) {
   }, initial)
 }
 
-function addDependencies(memo, dependencies) {
+function addDependencies (memo, dependencies) {
   dependencies.forEach(function (dependency) {
-    var version = packageVersionMap[dependency] || '*'
-    memo[dependency] = version
+    var packageVersion
+    var packageName = dependency
+    var packageInfo = packageVersionMap[dependency] || {}
+    if (typeof packageInfo === 'string') {
+      packageVersion = packageInfo
+    } else {
+      packageName = packageInfo.name || packageName
+      packageVersion = packageInfo.version || '*'
+    }
+    memo[packageName] = packageVersion
   })
+  return memo
+}
+
+function concatHeaderBody (memo, item) {
+  if (item.header) memo.header += `\n${item.header}`
+  if (item.body) memo.header += `\n${item.body}`
   return memo
 }
 
@@ -24,11 +38,24 @@ class ConfigBuilder {
     this.generator = generator
   }
 
-  addRequirement(requirement) {
+  addRequirement (requirement) {
     if (requirement && this.requirements.indexOf(requirement) === -1) this.requirements.push(requirement)
   }
 
-  savePackageFile() {
+  getSetupDef (defaultRenderer) {
+    let setupDef = { header: '', body: '' }
+    if (defaultRenderer) {
+      setupDef.header = `import renderer from 'marionette.renderers/${defaultRenderer}'`
+      setupDef.body = 'View.setRenderer(renderer)'
+    }
+    return reduceField(this.requirements, 'setup', concatHeaderBody, setupDef)
+  }
+
+  getSassDef () {
+    return reduceField(this.requirements, 'sass', concatHeaderBody, {header: '', body: ''})
+  }
+
+  savePackageFile () {
     var fileContents = this.generator.fs.readJSON(this.generator.templatePath('package.json'))
     var dependencies = reduceField(this.requirements, 'dependencies', addDependencies, {})
     var devDependencies = reduceField(this.requirements, 'devDependencies', addDependencies, {})
@@ -37,7 +64,7 @@ class ConfigBuilder {
     this.generator.fs.writeJSON(this.generator.destinationPath('package.json'), fileContents)
   }
 
-  saveWebpackConfigFile() {
+  saveWebpackConfigFile () {
     var loadersDef = reduceField(this.requirements, 'loaders', function (memo, loaders) {
       loaders.forEach(function (item) {
         if (item.body) memo.body += ',' + item.body
@@ -45,7 +72,6 @@ class ConfigBuilder {
       })
       return memo
     }, {require: '', body: ''})
-
 
     this.generator.fs.copyTpl(
       this.generator.templatePath('webpack.config.js'),

@@ -39,6 +39,7 @@ module.exports = class extends Generator {
       choices: [
         { name: 'None', value: '', short: 'No CSS/UI framework' },
         { name: 'Bootstrap 3', value: 'bootstrap3', short: 'Bootstrap v3' },
+        { name: 'Bootstrap 4', value: 'bootstrap4', short: 'Bootstrap v4' },
         { name: 'Framework7', value: 'framework7', short: 'Framework7 mobile framework' }
       ]
     }, {
@@ -137,18 +138,21 @@ module.exports = class extends Generator {
   }
 
   writing () {
-    let setupDef = { header: '', body: '' }
     let defaultRenderer = rendererMap[this.props.defaultRenderer] || this.props.defaultRenderer
-    if (defaultRenderer) {
-      setupDef.header = `import renderer from 'marionette.renderers/${defaultRenderer}'`
-      setupDef.body = 'View.setRenderer(renderer)'
-    }
+    let setupDef = this.builder.getSetupDef(defaultRenderer)
+    let sassDef = this.builder.getSassDef()
+
     this.builder.savePackageFile()
     this.builder.saveWebpackConfigFile()
     this.fs.copyTpl(
       this.templatePath('setup.js'),
       this.destinationPath('src/setup.js'),
       setupDef
+    )
+    this.fs.copyTpl(
+      this.templatePath('main.scss'),
+      this.destinationPath('src/main.scss'),
+      sassDef
     )
     this.fs.copy(
       this.templatePath('src'),
