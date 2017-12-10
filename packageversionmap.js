@@ -21,7 +21,16 @@ module.exports = {
   'babel-plugin-jsx-pragmatic': '^1.0.2',
   'inferno': '^3.4.3',
   'babel-plugin-inferno': '^3.2.0',
-  'bootstrap': '^3.3.7',
+  'bootstrap3': {
+    name: 'bootstrap',
+    version: '^3.3.7'
+  },
+  'bootstrap4': {
+    name: 'bootstrap',
+    version: '4.0.0-beta.2'
+  },
+  'popper.js': '^1.12.9',
+  'font-awesome': '^4.7.0',
   'url-loader': '^0.5.8',
   'file-loader': '^0.11.1'
 }

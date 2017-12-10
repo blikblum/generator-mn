@@ -139,7 +139,7 @@ module.exports = {
   },
 
   bootstrap3: {
-    dependencies: ['bootstrap'],
+    dependencies: ['bootstrap3'],
     devDependencies: ['url-loader', 'file-loader'],
     loaders: [{body: `{
       test: /\\.(woff|woff2)$/,
@@ -156,6 +156,33 @@ module.exports = {
     }`}],
     setup: {
       header: 'import \'bootstrap/dist/css/bootstrap.css\''
+    }
+  },
+
+  bootstrap4: {
+    dependencies: ['bootstrap4', 'popper.js', 'font-awesome'],
+    devDependencies: ['url-loader', 'file-loader'],
+    loaders: [{body: `{
+      test: /\\.(woff|woff2)$/,
+      use: "url-loader?limit=10000&mimetype=application/font-woff"
+    }, {
+      test: /\\.ttf$/,
+      use: "url-loader?limit=10000&mimetype=application/octet-stream"
+    }, {
+      test: /\\.eot$/,
+      use: "file-loader"
+    }, {
+      test: /\\.svg$/,
+      use: "url-loader?limit=10000&mimetype=image/svg+xml"
+    }`}],
+    setup: {
+      header: 'import \'bootstrap/dist/css/bootstrap.css\''
+    },
+    sass: {
+      header: `
+        $fa-font-path: "~font-awesome/fonts";
+        @import '~font-awesome/scss/font-awesome.scss';
+      `
     }
   },
 
