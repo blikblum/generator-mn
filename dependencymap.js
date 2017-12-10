@@ -153,6 +153,10 @@ module.exports = {
     dependencies: ['marionette.native']
   },
 
+  'marionette.routing': {
+    dependencies: ['marionette.routing']
+  },
+
   bootstrap3: {
     dependencies: ['bootstrap3'],
     devDependencies: ['url-loader', 'file-loader', 'imports-loader'],

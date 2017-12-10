@@ -51,7 +51,8 @@ The generator will ask for some options:
   * backbone.syphon
   * backbone.localstorage
   * marionette.native
-  
+  * marionette.routing
+
 ### Build the application
 
 For development (a server will be started at http://localhost:8080)

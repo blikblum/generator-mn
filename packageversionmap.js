@@ -34,5 +34,6 @@ module.exports = {
   'url-loader': '^0.5.8',
   'file-loader': '^0.11.1',
   'imports-loader': '^0.7.1',
-  'marionette.native': '0.5.1'
+  'marionette.native': '^0.5.1',
+  'marionette.routing': '^0.7.0'
 }
