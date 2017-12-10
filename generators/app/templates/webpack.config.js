@@ -8,6 +8,8 @@ var CleanPlugin = require('clean-webpack-plugin')
 
 var isProd = process.argv.indexOf('-p') !== -1
 var DIST_DIR = 'dist'
+var devDevTool = 'source-map' // see https://webpack.js.org/configuration/devtool/ for options
+var prodDevTool = false
 
 var envPresetConfig = {
   modules: false,
@@ -69,5 +71,5 @@ module.exports = {
     }<%- loaderBody %>]
   },
   plugins: plugins,
-  devtool: isProd ? undefined : 'source-map'
+  devtool: isProd ? prodDevTool : devDevTool
 }
