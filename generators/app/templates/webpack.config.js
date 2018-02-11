@@ -36,7 +36,7 @@ var plugins = [
   })
 ]
 
-if (isProd) plugins.push (new CleanPlugin([DIST_DIR + '/*.*']))
+if (isProd) plugins.push(new CleanPlugin([DIST_DIR + '/*.*']))
 
 module.exports = {
   entry: './src/main.js',
@@ -47,7 +47,8 @@ module.exports = {
   module: {
     rules: [{
       test: /\.js$/,
-      exclude: [/node_modules/],
+      include: [<% for(var i=0; i<babelIncludes.length; i++) {%>
+         path.resolve('<%=babelIncludes[i]%>'),<% } %>],
       use: [{
         loader: 'babel-loader',
         options: {

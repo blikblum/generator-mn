@@ -93,10 +93,17 @@ class ConfigBuilder {
       return memo
     }, {require: '', body: ''})
 
+    var babelIncludes = reduceField(this.requirements, 'babelIncludes', function (memo, includes) {
+      return memo.concat(includes)
+    }, ['src'])
+
+    // dedupe
+    babelIncludes = Array.from(new Set(babelIncludes))
+
     this.generator.fs.copyTpl(
       this.generator.templatePath('webpack.config.js'),
       this.generator.destinationPath('webpack.config.js'),
-      {loaderBody: loadersDef.body, require: loadersDef.require}
+      {loaderBody: loadersDef.body, require: loadersDef.require, babelIncludes}
     )
   }
 }
