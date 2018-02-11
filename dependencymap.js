@@ -214,6 +214,7 @@ $fa-font-path: "~font-awesome/fonts";
   framework7: {
     dependencies: ['framework7', 'marionette.f7'],
     devDependencies: ['file-loader'],
+    babelIncludes: ['node_modules/framework7', 'node_modules/dom7', 'node_modules/template7'],
     loaders: [{
       body: `{
         test: /\\.png$/,
@@ -221,7 +222,11 @@ $fa-font-path: "~font-awesome/fonts";
       }`
     }],
     setup: {
-      header: 'import \'framework7/dist/css/framework7.material.css\''
+      header: `import 'framework7/dist/css/framework7.css'
+import Framework7 from 'framework7'
+import Popup from 'framework7/dist/components/popup/popup.js'
+`,
+      body: `Framework7.use([Popup])`
     }
   }
-};
+}
