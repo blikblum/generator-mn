@@ -3,8 +3,8 @@
 
 ## Features
 
- * Uses webpack 3.x with dev-server
- * Uses babel 6.x with preset-env (ie 11 + green browsers) 
+ * Uses webpack 4.x with dev-server
+ * Uses babel 6.x with preset-env, by default to supports ie 11 and green browsers (configurable)  
  * Configures service-worker (WorkBox).
  * Custom CSS framework (Bootstrap 3, Bootstrap 4, Framework7)
  * Custom renderer (Snabbdom, React, inferno, idom, virtual-dom, rivets) 
@@ -67,7 +67,7 @@ npm run prod
 
 ## License
 
-MIT © [Luiz Américo]()
+MIT © [Luiz Américo Pereira Câmara]()
 
 
 [npm-image]: https://badge.fury.io/js/generator-mn.svg
