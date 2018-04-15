@@ -1,12 +1,11 @@
 var path = require('path')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
-var ExtractTextPlugin = require('extract-text-webpack-plugin')
-var WorkboxPlugin = require('workbox-webpack-plugin')
+var MiniCSSExtractPlugin = require('mini-css-extract-plugin')
+var {GenerateSW} = require('workbox-webpack-plugin')
 var CleanPlugin = require('clean-webpack-plugin')
 
 <%- require %>
 
-var isProd = process.argv.indexOf('-p') !== -1
 var DIST_DIR = 'dist'
 var devDevTool = 'source-map' // see https://webpack.js.org/configuration/devtool/ for options
 var prodDevTool = false
@@ -23,32 +22,40 @@ var envPresetConfig = {
 }
 
 var plugins = [
-  new ExtractTextPlugin('styles.css'),
+  new MiniCSSExtractPlugin({
+    // Options similar to the same options in webpackOptions.output
+    // both options are optional
+    filename: "[name].css",
+    chunkFilename: "[id].css"
+  }),
 
   new HtmlWebpackPlugin({
     template: path.resolve(__dirname, 'src/index.html')
   }),
 
-  new WorkboxPlugin({
+  new GenerateSW({
     globDirectory: DIST_DIR,
     globPatterns: ['**/*.{html,js,css}'],
     swDest: path.join(DIST_DIR, 'sw.js')
   })
 ]
 
-if (isProd) plugins.push(new CleanPlugin([DIST_DIR + '/*.*']))
+module.exports = function (env) {
+  var isProd = env.production
 
-module.exports = {
-  entry: './src/main.js',
-  output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, DIST_DIR)
-  },
-  module: {
-    rules: [{
-      test: /\.js$/,
-      include: [<% for(var i=0; i<babelIncludes.length; i++) {%>
-         path.resolve('<%=babelIncludes[i]%>'),<% } %>],
+  if (isProd) plugins.push(new CleanPlugin([DIST_DIR + '/*.*']))
+
+  return {
+    entry: './src/main.js',
+    output: {
+      filename: 'bundle.js',
+      path: path.resolve(__dirname, DIST_DIR)
+    },
+    module: {
+      rules: [{
+        test: /\.js$/,
+        include: [<% for(var i=0; i<babelIncludes.length; i++) {%>
+        path.resolve('<%=babelIncludes[i]%>'),<% } %>],
       use: [{
         loader: 'babel-loader',
         options: {
@@ -58,19 +65,17 @@ module.exports = {
         }
       }]
     }, {
-      test: /\.css$/,
-      use: ExtractTextPlugin.extract({
-        fallback: 'style-loader',
-        use: 'css-loader'
-      })
+    test: /\.css$/,
+      use: [
+      MiniCSSExtractPlugin.loader,
+      'css-loader'
+      ]
     }, {
       test: /\.(sass|scss)$/,
-      use: ExtractTextPlugin.extract({
-        fallback: 'style-loader',
-        use: ['css-loader', 'sass-loader']
-      })
-    }<%- loaderBody %>]
-  },
-  plugins: plugins,
-  devtool: isProd ? prodDevTool : devDevTool
+      use: [MiniCSSExtractPlugin.loader, 'css-loader', 'sass-loader']
+     }<%- loaderBody %>]
+    },
+    plugins: plugins,
+    devtool: isProd ? prodDevTool : devDevTool
+  }
 }

@@ -113,7 +113,8 @@ module.exports = class extends Generator {
         {name: 'backbone.validation'},
         {name: 'backbone.syphon'},
         {name: 'backbone.localstorage'},
-        {name: 'marionette.native'}
+        {name: 'marionette.native'},
+        {name: 'marionette.routing'}
       ]
     }]
 

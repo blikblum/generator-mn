@@ -14,7 +14,7 @@ module.exports = {
   'incremental-bars-loader': '^0.1.0',
   'virtual-dom-loader': '^0.1.0',
   'virtual-jade-loader': '^0.5.0',
-  'snabbdom': '^0.6.9',
+  'snabbdom': '^0.7.1',
   'snabbdom-helpers': '^4.0.1',
   'snabbdom-pragma': '^2.3.0',
   'babel-plugin-transform-react-jsx': '^6.24.1',
@@ -27,15 +27,15 @@ module.exports = {
   },
   'bootstrap4': {
     name: 'bootstrap',
-    version: '4.0.0-beta.2'
+    version: '4.1.0'
   },
   'popper.js': '^1.12.9',
   'font-awesome': '^4.7.0',
-  'url-loader': '^0.5.8',
-  'file-loader': '^0.11.1',
-  'imports-loader': '^0.7.1',
+  'url-loader': '^1.0.1',
+  'file-loader': '^1.1.11',
+  'imports-loader': '^0.8.0',
   'marionette.native': '^0.5.1',
-  'marionette.routing': '^0.7.0',
+  'marionette.routing': '^0.8.0',
   'framework7': '^2.0.7',
   'marionette.f7': '^1.0.0'
 }
