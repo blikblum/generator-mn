@@ -54,21 +54,20 @@ module.exports = function (env) {
     module: {
       rules: [{
         test: /\.js$/,
-        include: [<% for(var i=0; i<babelIncludes.length; i++) {%>
-        path.resolve('<%=babelIncludes[i]%>'),<% } %>],
-      use: [{
-        loader: 'babel-loader',
-        options: {
-          presets: [
-            ['env', envPresetConfig]
-          ]
-        }
-      }]
+        include: [<%- babelIncludes %>],
+        use: [{
+          loader: 'babel-loader',
+          options: {
+            presets: [
+              ['env', envPresetConfig]
+           ]
+          }
+        }]
     }, {
-    test: /\.css$/,
+      test: /\.css$/,
       use: [
-      MiniCSSExtractPlugin.loader,
-      'css-loader'
+        MiniCSSExtractPlugin.loader,
+        'css-loader'
       ]
     }, {
       test: /\.(sass|scss)$/,

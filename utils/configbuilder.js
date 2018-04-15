@@ -97,8 +97,8 @@ class ConfigBuilder {
       return memo.concat(includes)
     }, ['src'])
 
-    // dedupe
-    babelIncludes = Array.from(new Set(babelIncludes))
+    // dedupe, quote and join
+    babelIncludes = Array.from(new Set(babelIncludes)).map(include => `'${include}'`).join(',')
 
     this.generator.fs.copyTpl(
       this.generator.templatePath('webpack.config.js'),
