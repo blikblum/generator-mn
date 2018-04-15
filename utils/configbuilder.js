@@ -93,17 +93,37 @@ class ConfigBuilder {
       return memo
     }, {require: '', body: ''})
 
+    var supportsJSX = reduceField(this.requirements, 'supportsJSX', function (memo, supports) {
+      return memo || supports
+    }, false)
+
+    var jsFilePattern = supportsJSX ? '/\\.(js|jsx)$/' : '/\\.js$/'
+
+    var babelPlugins = reduceField(this.requirements, 'babelPlugins', function (memo, plugins) {
+      return memo.concat(plugins)
+    }, [])
+
+    babelPlugins = babelPlugins.join(',')
+
+    var babelPresets = reduceField(this.requirements, 'babelPresets', function (memo, presets) {
+      return memo.concat(presets)
+    }, [])
+
+    babelPresets.push(`['env', envPresetConfig]`)
+
+    babelPresets = babelPresets.join(',')
+
     var babelIncludes = reduceField(this.requirements, 'babelIncludes', function (memo, includes) {
       return memo.concat(includes)
     }, ['src'])
 
-    // dedupe, quote and join
-    babelIncludes = Array.from(new Set(babelIncludes)).map(include => `'${include}'`).join(',')
+    // dedupe, resolve/quote and join
+    babelIncludes = Array.from(new Set(babelIncludes)).map(include => `path.resolve('${include}')`).join(',')
 
     this.generator.fs.copyTpl(
       this.generator.templatePath('webpack.config.js'),
       this.generator.destinationPath('webpack.config.js'),
-      {loaderBody: loadersDef.body, require: loadersDef.require, babelIncludes}
+      {loaderBody: loadersDef.body, require: loadersDef.require, babelIncludes, babelPlugins, babelPresets, jsFilePattern}
     )
   }
 }

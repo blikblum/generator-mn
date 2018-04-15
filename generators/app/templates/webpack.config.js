@@ -41,7 +41,7 @@ var plugins = [
 ]
 
 module.exports = function (env) {
-  var isProd = env.production
+  var isProd = env && env.production
 
   if (isProd) plugins.push(new CleanPlugin([DIST_DIR + '/*.*']))
 
@@ -53,14 +53,13 @@ module.exports = function (env) {
     },
     module: {
       rules: [{
-        test: /\.js$/,
+        test: <%- jsFilePattern %>,
         include: [<%- babelIncludes %>],
         use: [{
           loader: 'babel-loader',
           options: {
-            presets: [
-              ['env', envPresetConfig]
-           ]
+            presets: [<%- babelPresets %>],
+            plugins: [<%- babelPlugins %>]
           }
         }]
     }, {

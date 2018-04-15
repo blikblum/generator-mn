@@ -61,41 +61,16 @@ module.exports = {
   'snabbdom-jsx': {
     dependencies: ['snabbdom-pragma'],
     devDependencies: ['babel-plugin-transform-react-jsx', 'babel-plugin-jsx-pragmatic'],
-    loaders: [{body: `{
-        test: /\\.jsx$/,
-        use: [{
-          loader: 'babel-loader', 
-          options: {
-            presets: [
-              ['env', envPresetConfig]
-            ],          
-            plugins: [
-              ['transform-react-jsx', {pragma: 'Snabbdom.createElement'}],
-              ['babel-plugin-jsx-pragmatic', {
-                module: 'snabbdom-pragma',
-                import: 'Snabbdom'
-              }]
-            ]
-          }
-        }]
-    }`}]
+    supportsJSX: true,
+    babelPlugins: [`['transform-react-jsx', {pragma: 'Snabbdom.createElement'}]`,
+      `['babel-plugin-jsx-pragmatic', {module: 'snabbdom-pragma', import: 'Snabbdom'}]`]
   },
 
   react: {
     dependencies: ['react', 'react-dom'],
     devDependencies: ['babel-preset-react'],
-    loaders: [{body: `{
-        test: /\\.jsx$/,
-        use: [{
-          loader: 'babel-loader', 
-          options: {
-            presets: [
-              'react',
-              ['env', envPresetConfig]
-            ]
-          }
-        }]
-    }`}]
+    supportsJSX: true,
+    babelPresets: [`'react'`]
   },
 
   'snabbdom-helpers': {
@@ -112,21 +87,8 @@ module.exports = {
 
   'inferno-jsx': {
     devDependencies: ['babel-plugin-inferno'],
-    loaders: [{body: `{
-        test: /\\.jsx$/,
-        use: [{
-          loader: 'babel-loader', 
-          options: {
-            presets: [
-              ['env', envPresetConfig]
-            ],
-            plugins: [["inferno", {
-              "imports": true,
-              "pragma": ""
-            }]]
-          }
-        }]
-    }`}]
+    supportsJSX: true,
+    babelPlugins: [`['inferno', {imports: true, pragma: ''}]`]
   },
 
   'inferno-hyperscript': {
