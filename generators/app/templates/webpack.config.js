@@ -73,6 +73,9 @@ module.exports = function (env) {
       use: [MiniCSSExtractPlugin.loader, 'css-loader', 'sass-loader']
      }<%- loaderBody %>]
     },
+    resolve: {
+      modules: [path.resolve(__dirname, './src/common'), 'node_modules']
+    },    
     plugins: plugins,
     devtool: isProd ? prodDevTool : devDevTool
   }

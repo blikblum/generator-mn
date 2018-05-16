@@ -165,6 +165,10 @@ module.exports = class extends Generator {
       this.templatePath('.gitignore'),
       this.destinationPath('.gitignore')
     )
+    this.fs.copy(
+      this.templatePath('jsconfig.json'),
+      this.destinationPath('jsconfig.json')
+    )
   }
 
   install () {
