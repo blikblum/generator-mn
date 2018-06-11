@@ -3,7 +3,7 @@ var packageVersionMap = require('../packageversionmap')
 
 function reduceField (requirements, fieldName, callback, initial) {
   return requirements.reduce(function (memo, item) {
-    var def = dependencyMap[item]
+    var def = dependencyMap[item] || {dependencies: [item]}
     var entry = def[fieldName]
     if (entry) return callback(memo, entry)
     return memo
