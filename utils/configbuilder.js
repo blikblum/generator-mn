@@ -101,7 +101,7 @@ class ConfigBuilder {
 
     var babelPlugins = reduceField(this.requirements, 'babelPlugins', function (memo, plugins) {
       return memo.concat(plugins)
-    }, [])
+    }, [`'transform-class-properties'`, `'transform-object-rest-spread'`, `'syntax-dynamic-import'`])
 
     babelPlugins = babelPlugins.join(',')
 
