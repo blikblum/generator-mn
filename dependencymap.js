@@ -147,7 +147,7 @@ $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
 
   bootstrap4: {
     dependencies: ['bootstrap4', 'popper.js', 'font-awesome'],
-    devDependencies: ['url-loader', 'file-loader', 'imports-loader'],
+    devDependencies: ['url-loader', 'file-loader'],
     loaders: [{body: `{
       test: /\\.(woff|woff2)$/,
       use: "url-loader?limit=10000&mimetype=application/font-woff"
@@ -160,9 +160,6 @@ $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
     }, {
       test: /\\.svg$/,
       use: "url-loader?limit=10000&mimetype=image/svg+xml"
-    }, {
-      test: /^bootstrap\\.js$/,
-      use: "imports-loader?jQuery=jquery,$=jquery,Popper=popper.js,this=>window"
     }`}],
     sass: {
       header: `
