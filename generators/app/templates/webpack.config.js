@@ -20,28 +20,26 @@ var envPresetConfig = {
 }
 
 var plugins = [
-  new MiniCSSExtractPlugin({
-    // Options similar to the same options in webpackOptions.output
-    // both options are optional
-    filename: "[name].css",
-    chunkFilename: "[id].css"
-  }),
-
   new HtmlWebpackPlugin({
     template: path.resolve(__dirname, 'src/index.html')
-  }),
-
-  new GenerateSW({
-    globDirectory: DIST_DIR,
-    globPatterns: ['**/*.{html,js,css}'],
-    swDest: path.join(DIST_DIR, 'sw.js')
   })
 ]
 
 module.exports = function (env) {
   var isProd = env && env.production
-
-  if (isProd) plugins.push(new CleanPlugin([DIST_DIR + '/*.*']))
+  
+  if (isProd) {
+    plugins.push(new CleanPlugin([DIST_DIR + '/*.*']))
+    plugins.push(new GenerateSW({
+      swDest: path.join('sw.js')
+    }))
+    plugins.push(new MiniCSSExtractPlugin({
+      // Options similar to the same options in webpackOptions.output
+      // both options are optional
+      filename: '[name].css',
+      chunkFilename: '[id].css'
+    }))
+  }
 
   return {
     entry: './src/main.js',
@@ -63,12 +61,16 @@ module.exports = function (env) {
     }, {
       test: /\.css$/,
       use: [
-        MiniCSSExtractPlugin.loader,
+        isProd ? MiniCSSExtractPlugin.loader : 'style-loader',
         'css-loader'
       ]
     }, {
       test: /\.(sass|scss)$/,
-      use: [MiniCSSExtractPlugin.loader, 'css-loader', 'sass-loader']
+      use: [
+        isProd ? MiniCSSExtractPlugin.loader : 'style-loader', 
+        'css-loader', 
+        'sass-loader'
+      ]
      }<%- loaderBody %>]
     },
     resolve: {
