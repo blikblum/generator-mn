@@ -29,6 +29,7 @@ module.exports = {
     name: 'bootstrap',
     version: '4.1.0'
   },
+  'bottlejs': '^1.7.1',
   'popper.js': '^1.12.9',
   'font-awesome': '^4.7.0',
   'url-loader': '^1.0.1',

@@ -106,8 +106,8 @@ module.exports = class extends Generator {
       }
     }, {
       type: 'checkbox',
-      name: 'extra',
-      message: 'Extra dependencies',
+      name: 'bb-mn-libraries',
+      message: 'Backbone / Marionette libraries',
       choices: [
         {name: 'backbone-computedfields'},
         {name: 'backbone.validation'},
@@ -117,6 +117,14 @@ module.exports = class extends Generator {
         {name: 'marionette.native'},
         {name: 'marionette.routing'},
         {name: 'marionette.modalservice'}
+      ]
+    }, {
+      type: 'checkbox',
+      name: 'extra',
+      message: 'Extra features',
+      choices: [
+        {name: 'bottlejs', short: 'Dependency injection library'},
+        {name: 'hygen', short: 'Code generator (preconfigured for model, view, route)'}
       ]
     }]
 
@@ -132,7 +140,9 @@ module.exports = class extends Generator {
 
       addonsRequirements.forEach(this.builder.addRequirement, this.builder)
 
-      props.extra.forEach(this.builder.addRequirement, this.builder)
+      ;['bb-mn-libraries', 'extra'].forEach(propName => { 
+        props[propName].forEach(this.builder.addRequirement, this.builder)
+      })
 
       this.builder.addRequirement(props.css)
 
@@ -147,22 +157,48 @@ module.exports = class extends Generator {
     let setupDef = this.builder.getSetupDef(defaultRenderer)
     let sassDef = this.builder.getSassDef()
 
+    this.DEVMODE && this.log('hygen', this.builder.hasRequirement('hygen'))
+
     this.builder.savePackageFile()
     this.builder.saveWebpackConfigFile()
+
+    this.fs.copy(
+      this.templatePath('src'),
+      this.destinationPath('src')
+    )
+
+    if (this.builder.hasRequirement('hygen')) {
+      this.fs.copy(
+        this.templatePath('.hygen.js'),
+        this.destinationPath('.hygen.js')
+      )
+      this.fs.copy(
+        this.templatePath('_templates'),
+        this.destinationPath('_templates')
+      )
+    }
+
+    if (this.builder.hasRequirement('bottlejs')) {
+      this.fs.copy(
+        this.templatePath('common/di.js'),
+        this.destinationPath('src/common/di.js')
+      )
+      this.fs.copy(
+        this.templatePath('setup/services.js'),
+        this.destinationPath('src/setup/services.js')
+      )
+    }
+
     this.fs.copyTpl(
-      this.templatePath('setup.js'),
-      this.destinationPath('src/setup.js'),
+      this.templatePath('setup/main.js'),
+      this.destinationPath('src/setup/main.js'),
       setupDef
     )
     this.fs.copyTpl(
       this.templatePath('main.scss'),
       this.destinationPath('src/main.scss'),
       sassDef
-    )
-    this.fs.copy(
-      this.templatePath('src'),
-      this.destinationPath('src')
-    )
+    )    
     this.fs.copy(
       this.templatePath('.gitignore'),
       this.destinationPath('.gitignore')

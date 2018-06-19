@@ -60,6 +60,10 @@ class ConfigBuilder {
     if (requirement && this.requirements.indexOf(requirement) === -1) this.requirements.push(requirement)
   }
 
+  hasRequirement (requirement) {
+    return this.requirements.indexOf(requirement) !== -1
+  }
+
   getSetupDef (defaultRenderer) {
     let setupDef = { header: '', body: '' }
     if (defaultRenderer) {

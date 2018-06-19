@@ -58,6 +58,10 @@ module.exports = {
     }`}]
   },
 
+  'hygen': {
+    dependencies: []
+  },
+
   'snabbdom-jsx': {
     dependencies: ['snabbdom-pragma-lite'],
     devDependencies: ['babel-plugin-transform-react-jsx', 'babel-plugin-jsx-pragmatic'],

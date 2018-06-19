@@ -1,4 +1,4 @@
-import './setup'
+import './setup/main'
 import {Application} from 'backbone.marionette'
 import IndexView from './index/view'
 
