@@ -1,14 +1,14 @@
 ---
 to: <%- path %>/route.js
 ---
-import {Route} from 'marionette.routing'
-import View from './view'
+import { Route } from 'marionette.routing'
+import { <%- viewName %> } from './view'
 
 const <%- routeName %> = Route.extend({
   activate (transition) {
   },
 
-  viewClass: View,
+  viewClass: <%- viewName %>,
 
   viewOptions () {
     return {
@@ -17,4 +17,4 @@ const <%- routeName %> = Route.extend({
   }
 })
 
-export default <%- routeName %>
+export { <%- routeName %> }

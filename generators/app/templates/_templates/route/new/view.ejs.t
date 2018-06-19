@@ -1,7 +1,7 @@
 ---
 to: <%- path %>/view.js
 ---
-import {View} from 'backbone.marionette'
+import { View } from 'backbone.marionette'
 
 const <%- viewName %> = View.extend({
   template: function () {
@@ -13,4 +13,4 @@ const <%- viewName %> = View.extend({
   }
 })
 
-export default <%- viewName %>
+export { <%- viewName %> }

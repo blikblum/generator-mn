@@ -1,6 +1,8 @@
+const camelize = require('../../_utils/camelize')
+
 module.exports = {
   prompt: ({ inquirer, args }) => {
-    if (args.path) {
+    if (args.path && args.viewName && args.routeName) {
       return Promise.resolve({ allow: true })
     }
     return inquirer.prompt([{
@@ -11,12 +13,18 @@ module.exports = {
     {
       type: 'input',
       name: 'routeName',
-      message: 'Route name:'
+      message: 'Route name:',
+      default ({path}) {
+        return camelize(path, '/') + 'Route'
+      }
     },
     {
       type: 'input',
       name: 'viewName',
-      message: 'View name:'
+      message: 'View name:',
+      default ({path}) {
+        return camelize(path, '/') + 'View'
+      }
     }])
   }
 }
