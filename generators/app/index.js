@@ -61,8 +61,7 @@ module.exports = class extends Generator {
       message: 'Select Snabbdom addons',
       choices: [
         { name: 'JSX transformer', value: 'snabbdom-jsx' },
-        { name: 'Hyperscript helpers', value: 'snabbdom-helpers' },
-        { name: 'Jade transformer', value: 'virtual-jade' }
+        { name: 'Hyperscript helpers', value: 'snabbdom-helpers' }        
       ],
       when: function (answers) {
         return answers.renderers.indexOf('snabbdom') !== -1
@@ -132,19 +131,23 @@ module.exports = class extends Generator {
       // To access props later use this.props.someAnswer;
       this.DEVMODE && this.log('props', JSON.stringify(props))
 
-      props.renderers.forEach(this.builder.addRequirement, this.builder)
+      const addRequirement = this.builder.addRequirement.bind(this.builder)
+      const requirementProps = ['bb-mn-libraries', 'extra', 'css', 'renderers']
 
-      var addonsRequirements = Object.keys(props.addons || {}).reduce(function (requirements, addonName) {
+      requirementProps.forEach(propName => {
+        const propValue = props[propName]
+        if (Array.isArray(propValue)) {
+          propValue.forEach(addRequirement)
+        } else {
+          addRequirement(propValue)
+        }        
+      })
+            
+      const addonsRequirements = Object.keys(props.addons || {}).reduce(function (requirements, addonName) {
         return requirements.concat(props.addons[addonName])
       }, [])
 
-      addonsRequirements.forEach(this.builder.addRequirement, this.builder)
-
-      ;['bb-mn-libraries', 'extra'].forEach(propName => { 
-        props[propName].forEach(this.builder.addRequirement, this.builder)
-      })
-
-      this.builder.addRequirement(props.css)
+      addonsRequirements.forEach(addRequirement)
 
       this.config.set('defaultRenderer', props.defaultRenderer)
 
