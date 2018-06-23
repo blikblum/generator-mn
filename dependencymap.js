@@ -26,10 +26,6 @@ module.exports = {
     }`}]
   },
 
-  'virtual-dom': {
-    dependencies: ['virtual-dom']
-  },
-
   'virtual-dom-jsx': {
     devDependencies: ['virtual-dom-loader'],
     loaders: [{body: `{
@@ -44,10 +40,6 @@ module.exports = {
         test: /\\.pug$/,
         use: ['virtual-jade-loader']
     }`}]
-  },
-
-  'hyperscript-helpers': {
-    dependencies: ['hyperscript-helpers']
   },
 
   'handlebars-hyperscript': {
@@ -77,50 +69,10 @@ module.exports = {
     babelPresets: [`'react'`]
   },
 
-  'snabbdom-helpers': {
-    dependencies: ['snabbdom-helpers']
-  },
-
-  snabbdom: {
-    dependencies: ['snabbdom']
-  },
-
-  inferno: {
-    dependencies: ['inferno']
-  },
-
   'inferno-jsx': {
     devDependencies: ['babel-plugin-inferno'],
     supportsJSX: true,
     babelPlugins: [`['inferno', {imports: true, pragma: ''}]`]
-  },
-
-  'inferno-hyperscript': {
-    dependencies: ['inferno-hyperscript']
-  },
-
-  'backbone-computedfields': {
-    dependencies: ['backbone-computedfields']
-  },
-
-  'backbone.validation': {
-    dependencies: ['backbone.validation']
-  },
-
-  'backbone.syphon': {
-    dependencies: ['backbone.syphon']
-  },
-
-  'backbone.localstorage': {
-    dependencies: ['backbone.localstorage']
-  },
-
-  'marionette.native': {
-    dependencies: ['marionette.native']
-  },
-
-  'marionette.routing': {
-    dependencies: ['marionette.routing']
   },
 
   bootstrap3: {
