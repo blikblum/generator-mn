@@ -1,6 +1,6 @@
 module.exports = {
-  rivets: {
-    dependencies: ['rivets', 'rivets-backbone-adapter'],
+  tinybind: {
+    dependencies: ['tinybind', 'tinybind-backbone-adapter'],
     devDependencies: ['html-loader'],
     loaders: [{body: `{
       test: /-tpl\\.html$/,

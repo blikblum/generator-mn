@@ -1,8 +1,8 @@
 module.exports = {
   'backbone-computedfields': '^0.0.12',
   'backbone.validation': '^0.14.0',
-  'rivets': 'blikblum/rivets#svelte',
-  'rivets-backbone-adapter': 'blikblum/rivets-backbone-adapter#svelte',
+  'tinybind': '^0.11.0',
+  'tinybind-backbone-adapter': '^1.0.0',
   'html-loader': '^0.4.5',
   'incremental-dom': '^0.5.1',  
   'virtual-dom': '^2.1.1',

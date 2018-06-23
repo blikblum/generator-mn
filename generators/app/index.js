@@ -47,12 +47,12 @@ module.exports = class extends Generator {
       name: 'renderers',
       message: 'Select one or more custom renderers',
       choices: [
-        { name: 'React', value: 'react', short: 'React' },
-        { name: 'Rivets', value: 'rivets', short: `Rivets (Data binding library - blikblum's svelte fork)` },
-        { name: 'Incremental-Bars', value: 'incremental-bars', short: 'Incremental-Bars (Incremental DOM backend for Handlebars)' },
         { name: 'Snabbdom', value: 'snabbdom', short: 'Snabbdom (Virtual DOM library)' },
+        { name: 'React', value: 'react', short: 'React' },                
         { name: 'Virtual-DOM', value: 'virtual-dom' },
-        { name: 'Inferno', value: 'inferno', short: 'Inferno (Virtual DOM library)' }
+        { name: 'Inferno', value: 'inferno', short: 'Inferno (Virtual DOM library)' },
+        { name: 'Incremental-Bars', value: 'incremental-bars', short: 'Incremental-Bars (Incremental DOM backend for Handlebars)' },        
+        { name: 'Tinybind', value: 'tinybind', short: `Tinybind (Rivets based data binding library)` }
       ]
     }, {
       type: 'checkbox',
