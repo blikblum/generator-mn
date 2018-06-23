@@ -8,15 +8,6 @@ module.exports = {
     }`}]
   },
 
-  superviews: {
-    dependencies: ['incremental-dom'],
-    devDependencies: ['superviews.js', 'superviews-loader'],
-    loaders: [{body: `{
-        test: /-tpl\\.html$/,
-        use: ['babel-loader', 'superviews-loader']
-    }`}]
-  },
-
   'incremental-bars': {
     dependencies: ['incremental-dom', 'handlebars'],
     devDependencies: ['incremental-bars-loader'],
