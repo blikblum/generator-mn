@@ -1,4 +1,6 @@
 module.exports = {
+  'backbone-computedfields': '^0.0.12',
+  'backbone.validation': '^0.14.0',
   'rivets': 'blikblum/rivets#svelte',
   'rivets-backbone-adapter': 'blikblum/rivets-backbone-adapter#svelte',
   'html-loader': '^0.4.5',
@@ -16,7 +18,7 @@ module.exports = {
   'virtual-jade-loader': '^0.5.0',
   'snabbdom': '^0.7.1',
   'snabbdom-helpers': '^4.0.1',
-  'snabbdom-pragma-lite': '^3.0.0',
+  'snabbdom-pragma-lite': '^3.1.0',
   'babel-plugin-transform-react-jsx': '^6.24.1',
   'babel-plugin-jsx-pragmatic': '^1.0.2',
   'inferno': '^3.4.3',
@@ -27,7 +29,7 @@ module.exports = {
   },
   'bootstrap4': {
     name: 'bootstrap',
-    version: '4.1.0'
+    version: '^4.1.1'
   },
   'bottlejs': '^1.7.1',
   'popper.js': '^1.12.9',
@@ -35,8 +37,8 @@ module.exports = {
   'url-loader': '^1.0.1',
   'file-loader': '^1.1.11',
   'imports-loader': '^0.8.0',
-  'marionette.native': '^0.5.1',
+  'marionette.native': '^0.6.0',
   'marionette.routing': '^0.8.0',
-  'framework7': '^2.0.7',
-  'marionette.f7': '^1.0.0'
+  'framework7': '^2.3.1',
+  'marionette.f7': '^2.0.1'
 }
