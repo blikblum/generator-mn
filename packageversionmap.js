@@ -1,5 +1,6 @@
 module.exports = {
   'backbone-computedfields': '^0.0.12',
+  'backbone.localstorage': '^1.1.16',
   'backbone.validation': '^0.14.0',
   'tinybind': '^0.11.0',
   'tinybind-backbone-adapter': '^1.0.0',
@@ -35,8 +36,10 @@ module.exports = {
   'url-loader': '^1.0.1',
   'file-loader': '^1.1.11',
   'imports-loader': '^0.8.0',
+  'marionette.modalservice': '^0.6.0',
   'marionette.native': '^0.6.0',
-  'marionette.routing': '^0.8.0',
+  'marionette.routing': '^0.9.0',
+  'radio.service': '^0.6.0',
   'framework7': '^2.3.1',
   'marionette.f7': '^2.0.1'
 }
