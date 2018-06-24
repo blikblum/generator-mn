@@ -26,7 +26,7 @@ var plugins = [
 ]
 
 module.exports = function (env) {
-  var isProd = env && env.production
+  var isProd = env.mode === 'production'
   
   if (isProd) {
     plugins.push(new CleanPlugin([DIST_DIR + '/*.*']))
@@ -47,6 +47,7 @@ module.exports = function (env) {
       filename: 'bundle.js',
       path: path.resolve(__dirname, DIST_DIR)
     },
+    mode: isProd ? 'production' : 'development',    
     module: {
       rules: [{
         test: <%- jsFilePattern %>,
