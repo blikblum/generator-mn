@@ -1,13 +1,20 @@
-# generator-mn [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
+# generator-mn
 > Modern setup for Marionette applications
 
 ## Features
 
- * Uses webpack 4.x with dev-server
- * Uses babel 6.x with preset-env, by default to supports ie 11 and green browsers (configurable)  
- * Configures service-worker (WorkBox).
- * Custom CSS framework (Bootstrap 3, Bootstrap 4, Framework7)
- * Custom renderer (Snabbdom, React, inferno, idom, virtual-dom, rivets) 
+ * Bundling with webpack
+   * Configures `dev` npm script with a live server for development
+   * Configures `prod` npm script for production
+   * Uses the newer webpack tools (webpack-command and webpack-serve)
+ * Compilation with babel 6.x
+   * Uses preset-env
+   * Out of the box configured to support ie 11 and green browsers 
+ * Preconfigured service-worker using [Workbox](https://github.com/GoogleChrome/workbox) 
+ * Option to install CSS/UI frameworks
+ * Option to install custom renderers
+ * Option to install [bottlejs](https://github.com/young-steveo/bottlejs) (dependency injection micro library)
+ * Option to install [hygen](https://github.com/jondot/hygen) templates (view, model, route)
  
 ## Installation
 
@@ -31,19 +38,18 @@ The generator will ask for some options:
 ##### CSS/UI framework
   * none
   * Bootstrap 3
-  * Bootstrap 4
-  * Framework7
+  * Bootstrap 4 - with font awesome
+  * Framework7 v2
 
 ##### Renderers
   * Snabbdom
   * React
   * Inferno  
-  * Superviews (incremental-dom)
   * Incremental-Bars (Handlebars + incremental-dom)
   * Virtual-Dom
-  * Rivets (blikblum's fork)
+  * Tinybind (based on rivets)
 
-> Some renderers offers specific options like configuration of JSX or jade transformer
+> Some renderers offers specific options for addons like configuration of JSX or jade transformer
 
 ##### Backbone/Marionette plugins
   * backbone-computedfields
@@ -52,10 +58,16 @@ The generator will ask for some options:
   * backbone.localstorage
   * marionette.native
   * marionette.routing
+  * marionette.modalservices
+  * radio.service
+
+##### Extra libraries 
+  * bottlejs (dependency injection micro library)
+  * hygen templates for creating model, view, route (needs hygen installed globally)
 
 ### Build the application
 
-For development (a server will be started at http://localhost:8080)
+For development (a server will be started usually at http://localhost:8080)
 ```bash
 npm run dev 
 ```
