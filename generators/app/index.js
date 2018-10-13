@@ -60,7 +60,8 @@ module.exports = class extends Generator {
       message: 'Select Snabbdom addons',
       choices: [
         { name: 'JSX transformer', value: 'snabbdom-jsx' },
-        { name: 'Hyperscript helpers', value: 'snabbdom-helpers' }        
+        { name: 'Hyperscript helpers', value: 'snabbdom-helpers' },
+        { name: 'Custom Element', value: 'snabbdom-element' },
       ],
       when: function (answers) {
         return answers.renderers.indexOf('snabbdom') !== -1
@@ -190,6 +191,13 @@ module.exports = class extends Generator {
         this.destinationPath('src/setup/services.js')
       )
     }
+
+    if (this.builder.hasRequirement('snabbdom-element')) {
+      this.fs.copy(
+        this.templatePath('common/basecomponents.js'),
+        this.destinationPath('src/common/basecomponents.js')
+      )      
+    }    
 
     this.fs.copyTpl(
       this.templatePath('setup/main.js'),

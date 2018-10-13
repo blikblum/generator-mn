@@ -134,5 +134,19 @@ import Popup from 'framework7/dist/components/popup/popup.js'
 `,
       body: `Framework7.use([Popup])`
     }
+  },
+  'snabbdom-element': {
+    dependencies: ['snabbdom-element'],        
+    setup: {
+      header: `import { initElementClass } from 'snabbdom-element'`,
+      body: `const Component = initElementClass([
+        require('snabbdom/modules/attributes').default,
+        require('snabbdom/modules/eventlisteners').default,
+        require('snabbdom/modules/props').default,
+        require('snabbdom/modules/class').default,
+        require('snabbdom/modules/style').default,
+        require('snabbdom/modules/dataset').default
+      ])`
+    }
   }
 }
