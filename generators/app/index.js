@@ -176,8 +176,8 @@ module.exports = class extends Generator {
         this.destinationPath('.hygen.js')
       )
       this.fs.copy(
-        this.templatePath('_templates'),
-        this.destinationPath('_templates')
+        this.templatePath('.hygen-templates'),
+        this.destinationPath('.hygen-templates')
       )
     }
 
