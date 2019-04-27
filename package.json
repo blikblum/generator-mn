@@ -1,7 +1,7 @@
 {
   "name": "generator-mn",
   "version": "0.5.0",
-  "description": "Marionette applications with Webpack, Bootstrap, Framework7 and custom renderers",  
+  "description": "Marionette applications with Webpack, Bootstrap, Framework7 and custom renderers",
   "author": {
     "name": "Luiz Américo"
   },
@@ -26,7 +26,6 @@
     "eslint-plugin-standard": "^3.0.1",
     "jest": "^21.2.1",
     "jest-cli": "^21.2.1",
-    "nsp": "^2.8.1",
     "yeoman-assert": "^3.1.0",
     "yeoman-test": "^1.7.0"
   },
@@ -38,8 +37,7 @@
   "jest": {
     "testEnvironment": "node"
   },
-  "scripts": {
-    "prepublish": "nsp check",
+  "scripts": {    
     "pretest": "eslint . --fix",
     "test": "jest"
   },
