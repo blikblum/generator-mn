@@ -6,7 +6,9 @@
     "name": "Luiz Américo"
   },
   "files": [
-    "generators"
+    "generators",
+    "utils",
+    "*.js"
   ],
   "main": "generators/index.js",
   "keywords": [
