@@ -3,6 +3,7 @@ const Generator = require('yeoman-generator')
 const chalk = require('chalk')
 const path = require('path')
 const yosay = require('yosay')
+const commandExists = require('command-exists')
 const ConfigBuilder = require('../../utils/configbuilder')
 const rendererMap = require('../../renderermap')
 
@@ -220,6 +221,11 @@ module.exports = class extends Generator {
   }
 
   install () {
-    this.yarnInstall()
+    const isYarnAvailable = commandExists.sync('yarnpkg')
+    this.installDependencies({
+      yarn: isYarnAvailable,
+      npm: !isYarnAvailable,
+      bower: false
+    })
   }
 }
