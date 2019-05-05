@@ -210,7 +210,7 @@ module.exports = class extends Generator {
       sassDef
     )    
     this.fs.copy(
-      this.templatePath('.gitignore'),
+      this.templatePath('gitignore'),
       this.destinationPath('.gitignore')
     )
     this.fs.copy(
